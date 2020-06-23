@@ -4,10 +4,9 @@ using namespace std;
 
 int board[502][502];
 int vis[502][502];
-
 int n, m;
-
-
+int dx[4] = {1, 0, -1, 0};
+int dy[4] = {0, 1, 0, -1};
 int main() {
 
     cin >> n >> m;
@@ -17,15 +16,11 @@ int main() {
     int mx = 0; // 그림의 최대크기
     int num = 0; // 그림의 갯수
 
-    int dx[4] = {1, 0, -1, 0};
-    int dy[4] = {0, 1, 0, -1};
-
     // BFS의 시작점 위치 (i, j) 찾는 반복문
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++) {
             if(board[i][j] == 0 || vis[i][j]) continue;
             // 그림이 아니거나(0), 이미 방문했으면 패스
-
             // i, j에서 BFS를 시작하기 위한 세팅
             // 새로운 그림의 시작점
             num++;
@@ -43,9 +38,7 @@ int main() {
                    int ny = cur.second + dy[dir];
                    if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
                    if(vis[nx][ny] || board[nx][ny] != 1) continue;
-
                    vis[nx][ny] = 1;
-
                    Q.push({nx, ny});
                }
             }
@@ -53,6 +46,4 @@ int main() {
         }
     }
     cout << num << '\n' << mx;
-
-
 }
